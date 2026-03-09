@@ -1,4 +1,5 @@
 import { PERFUM_API_BASE_URL } from '../config/env'
+import { apiClient } from './apiClient'
 
 const PERFUM_API_LIST_URL = `${PERFUM_API_BASE_URL}/perfumes?limit=200&offset=0`
 const PERFUM_API_SEARCH_URL = (query) =>
@@ -130,6 +131,38 @@ function normalizePerfumApiProduct(item) {
   }
 }
 
+function normalizeDummyJsonProduct(item) {
+  const id = String(item.id || '').trim()
+  const title = item.title?.trim()
+
+  if (!id || !title) return null
+
+  return {
+    id,
+    title,
+    description: item.description?.trim() || 'Perfume sin descripción disponible.',
+    brand: item.brand?.trim() || 'Perfume',
+    gender: 'Unisex',
+    releaseYear: null,
+    price: typeof item.price === 'number' ? Number(item.price) : estimatePerfumePrice(id),
+    rating: item.rating ? Number(item.rating) : null,
+    thumbnail: item.thumbnail || item.images?.[0] || '',
+    category: item.category || 'perfumes',
+    source: 'dummyjson-fallback',
+  }
+}
+
+async function getDummyJsonPerfumesFallback() {
+  const data = await apiClient('/products/category/fragrances?limit=100')
+  const products = (data.products || []).map(normalizeDummyJsonProduct).filter(Boolean)
+
+  return {
+    products,
+    total: data.total || products.length,
+    source: 'dummyjson-fallback',
+  }
+}
+
 function normalizeAdminPerfumePayload(payload, base = {}) {
   const baseId = String(base.id || '').trim()
 
@@ -198,7 +231,13 @@ async function getPerfumApiPerfumes() {
       }
     }
 
-    throw new Error('No se pudo cargar el catálogo de PerfumAPI y no hay datos en caché disponibles.')
+    const fallback = await getDummyJsonPerfumesFallback()
+    return {
+      products: fallback.products,
+      total: fallback.total,
+      source: 'dummyjson-fallback',
+      warning: 'PerfumAPI no estuvo disponible. Se muestran perfumes de respaldo (DummyJSON).',
+    }
   }
 }
 
@@ -339,6 +378,14 @@ export const productsService = {
 
       const adminOnly = applyAdminMutations([]).find((item) => String(item.id) === String(productId))
       if (adminOnly) return adminOnly
+
+      try {
+        const dummy = await apiClient(`/products/${productId}`)
+        const normalizedDummy = normalizeDummyJsonProduct(dummy)
+        if (normalizedDummy) return normalizedDummy
+      } catch {
+        // continue to final error
+      }
     }
 
     throw new Error('No se pudo obtener el detalle del perfume en PerfumAPI.')
