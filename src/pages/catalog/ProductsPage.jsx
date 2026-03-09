@@ -11,25 +11,48 @@ function ProductsPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [warning, setWarning] = useState('')
+  // const [dataSource, setDataSource] = useState('')
+  // const sourceLabelMap = {
+  //   perfumapi: 'Origen: PerfumAPI',
+  //   cache: 'Origen: Caché local',
+  //   'dummyjson-fallback': 'Origen: DummyJSON (respaldo)',
+  // }
 
   useEffect(() => {
+    let isActive = true
+
     const load = async () => {
+      if (!isActive) return
       setLoading(true)
       setError('')
+      setWarning('')
+      // setDataSource('')
+
       try {
         const data = search.trim()
           ? await productsService.searchPerfumes(search.trim())
           : await productsService.getPerfumes()
+        if (!isActive) return
+
         setProducts(data.products || [])
+        setWarning(data.warning || '')
+        // setDataSource(data.source || '')
       } catch (err) {
+        if (!isActive) return
         setError(err.message)
       } finally {
-        setLoading(false)
+        if (isActive) {
+          setLoading(false)
+        }
       }
     }
 
     const timeoutId = setTimeout(load, 250)
-    return () => clearTimeout(timeoutId)
+    return () => {
+      isActive = false
+      clearTimeout(timeoutId)
+    }
   }, [search])
 
   const brandOptions = useMemo(() => {
@@ -69,7 +92,12 @@ function ProductsPage() {
   return (
     <section className="container-xl py-4 py-md-5">
       <div className="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-        <h1 className="page-title fw-bold m-0">Catálogo de perfumes</h1>
+        <div className="d-flex align-items-center gap-2 flex-wrap">
+          <h1 className="page-title fw-bold m-0">Catálogo de perfumes</h1>
+          {/* {!loading && !error && dataSource && (
+            <span className="badge text-bg-info">{sourceLabelMap[dataSource] || 'Origen: desconocido'}</span>
+          )} */}
+        </div>
         <div className="d-flex gap-2 flex-wrap mobile-stack catalog-filters">
           <input
             className="form-control"
@@ -113,6 +141,7 @@ function ProductsPage() {
       )}
 
       {error && <div className="alert alert-danger">{error}</div>}
+      {warning && <div className="alert alert-warning">{warning}</div>}
 
       {!loading && !error && (
         <>

@@ -121,9 +121,16 @@ Opciones recomendadas:
 3. **Vercel** (importando repo público).
 
 Para GitHub Pages:
-- Subir el repo a GitHub.
-- Ejecutar `npm run build`.
-- Publicar el contenido de `dist` con Actions o rama `gh-pages`.
+- Ya está configurado el workflow en `.github/workflows/deploy-pages.yml`.
+- Sube los cambios a la rama `main`.
+- En GitHub, entra a **Settings > Pages** y en **Source** selecciona **GitHub Actions**.
+- Cada `push` a `main` hará build y publicará automáticamente.
+
+### URL final esperada
+- `https://<tu-usuario>.github.io/Web_Perfumes_React/`
+
+### Nota sobre rutas (React Router)
+- El deploy genera `404.html` automáticamente para evitar errores al refrescar rutas internas en GitHub Pages.
 
 ## Requisitos académicos cubiertos
 - Rutas React: Cumplido
