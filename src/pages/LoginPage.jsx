@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../hooks'
 
 const loginSchema = z.object({
   username: z.string().min(3, 'Usuario mínimo 3 caracteres'),

@@ -1,6 +1,6 @@
 import { apiClient } from './apiClient'
+import { PERFUM_API_BASE_URL } from '../config/env'
 
-const PERFUM_API_BASE_URL = 'https://perfumapidatabase.onrender.com'
 const PERFUM_API_LIST_URL = `${PERFUM_API_BASE_URL}/perfumes?limit=200&offset=0`
 const PERFUM_API_SEARCH_URL = (query) =>
   `${PERFUM_API_BASE_URL}/perfumes/search/${encodeURIComponent(query)}?limit=200`

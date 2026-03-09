@@ -18,6 +18,55 @@ Características implementadas:
 - Diseño responsive adaptado a breakpoints: `1920px`, `990px`, `767px`, `510px`, `480px`.
 - Estructura profesional por capas: `services`, `context`, `hooks`, `components`, `pages`, `routes`.
 
+## Estructura recomendada (React)
+
+```text
+src/
+	config/
+		env.js
+	context/
+		AuthContext.jsx
+		index.js
+	hooks/
+		useAuth.js
+		index.js
+	services/
+		apiClient.js
+		authService.js
+		productsService.js
+		index.js
+	components/
+		Cards/
+			ProductCard.jsx
+		AppNavbar.jsx
+		ProductForm.jsx
+		ProtectedRoute.jsx
+		RoleRoute.jsx
+		index.js
+	pages/
+		catalog/
+			ProductsPage.jsx
+		details/
+			ProductDetailPage.jsx
+		AdminPage.jsx
+		HomePage.jsx
+		LoginPage.jsx
+		NotFoundPage.jsx
+		UserPage.jsx
+		index.js
+	routes/
+		AppRouter.jsx
+		index.js
+	App.jsx
+	main.jsx
+```
+
+Buenas prácticas aplicadas:
+- Configuración de endpoints y claves en `env.js` con soporte para `.env`.
+- Eliminación de componentes/páginas duplicadas sin uso.
+- `index.js` por capa para imports más limpios y mantenibles.
+- Separación clara entre `services`, `context`, `hooks`, `components`, `pages` y `routes`.
+
 ## Framework + librerías (con versiones)
 - `react` `^19.2.0`
 - `react-dom` `^19.2.0`
@@ -44,15 +93,19 @@ Características implementadas:
 	```bash
 	npm install
 	```
-4. Ejecutar en desarrollo:
+4. Crear archivo de entorno (Windows PowerShell):
+	```bash
+	Copy-Item .env.example .env
+	```
+5. Ejecutar en desarrollo:
 	```bash
 	npm run dev
 	```
-5. Compilar para producción:
+6. Compilar para producción:
 	```bash
 	npm run build
 	```
-6. Previsualizar build:
+7. Previsualizar build:
 	```bash
 	npm run preview
 	```
@@ -73,14 +126,14 @@ Para GitHub Pages:
 - Publicar el contenido de `dist` con Actions o rama `gh-pages`.
 
 ## Requisitos académicos cubiertos
-- Rutas React: ✅
-- API con login: ✅
-- Apartado usuario y admin: ✅
-- Métodos GET/POST + PUT/PATCH/DELETE: ✅
-- Responsive obligatorio: ✅
-- 3+ librerías extra (sin Axios ni iconos): ✅
-- Estructura profesional: ✅
-- README con descripción, stack/versions, licencia e instalación: ✅
+- Rutas React: Cumplido
+- API con login: Cumplido
+- Apartado usuario y admin: Cumplido
+- Métodos GET/POST + PUT/PATCH/DELETE: Cumplido
+- Responsive obligatorio: Cumplido
+- 3+ librerías extra (sin Axios ni iconos): Cumplido
+- Estructura profesional: Cumplido
+- README con descripción, stack/versions, licencia e instalación: Cumplido
 
 ## Licencia de uso
 Proyecto bajo licencia **MIT**. Ver archivo [LICENSE](./LICENSE).

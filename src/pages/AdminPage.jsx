@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
-import ProductForm from '../components/ProductForm'
-import { useAuth } from '../hooks/useAuth'
-import { productsService } from '../services/productsService'
+import { ProductForm } from '../components'
+import { useAuth } from '../hooks'
+import { productsService } from '../services'
 
 function AdminPage() {
   const { token } = useAuth()

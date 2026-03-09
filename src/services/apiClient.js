@@ -1,9 +1,9 @@
-const API_BASE_URL = 'https://dummyjson.com'
+import { DUMMYJSON_API_BASE_URL } from '../config/env'
 
 export async function apiClient(endpoint, options = {}) {
   const { method = 'GET', body, token, headers = {} } = options
 
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+  const response = await fetch(`${DUMMYJSON_API_BASE_URL}${endpoint}`, {
     method,
     headers: {
       'Content-Type': 'application/json',

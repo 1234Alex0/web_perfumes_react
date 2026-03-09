@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import ProductCard from '../components/ProductCard'
-import { productsService } from '../services/productsService'
+import { ProductCard } from '../../components'
+import { productsService } from '../../services'
 
 function ProductsPage() {
   const ITEMS_PER_PAGE = 50

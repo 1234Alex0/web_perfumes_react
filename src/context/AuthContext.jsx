@@ -1,17 +1,16 @@
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
-import { authService } from '../services/authService'
-
-const TOKEN_KEY = 'app_public_api_token'
+import { AUTH_TOKEN_STORAGE_KEY } from '../config/env'
+import { authService } from '../services'
 
 export const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY))
+  const [token, setToken] = useState(() => localStorage.getItem(AUTH_TOKEN_STORAGE_KEY))
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
   const logout = useCallback(() => {
-    localStorage.removeItem(TOKEN_KEY)
+    localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY)
     setToken(null)
     setUser(null)
   }, [])
@@ -46,7 +45,7 @@ export function AuthProvider({ children }) {
   const login = useCallback(async (credentials) => {
     const response = await authService.login(credentials)
     const receivedToken = response.accessToken || response.token
-    localStorage.setItem(TOKEN_KEY, receivedToken)
+    localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, receivedToken)
     setToken(receivedToken)
     const me = await authService.getCurrentUser(receivedToken)
     setUser(me)

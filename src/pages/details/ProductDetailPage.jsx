@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { productsService } from '../services/productsService'
+import { productsService } from '../../services'
 
 function ProductDetailPage() {
   const { productId } = useParams()
@@ -52,7 +52,12 @@ function ProductDetailPage() {
       <div className="card border-0 shadow-sm overflow-hidden">
         <div className="row g-0">
           <div className="col-12 col-md-5">
-            <img src={imageUrl} alt={product.title} className="w-100 h-100" style={{ objectFit: 'cover' }} />
+            <img
+              src={imageUrl}
+              alt={product.title}
+              className="w-100"
+              style={{ objectFit: 'contain', objectPosition: 'center', maxHeight: 760, backgroundColor: 'var(--bs-light)' }}
+            />
           </div>
           <div className="col-12 col-md-7">
             <div className="card-body p-4 p-lg-5">

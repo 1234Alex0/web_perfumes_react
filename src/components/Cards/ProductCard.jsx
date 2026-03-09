@@ -10,7 +10,7 @@ function ProductCard({ product }) {
         src={imageUrl}
         className="card-img-top"
         alt={product.title}
-        style={{ objectFit: 'cover', height: 180 }}
+        style={{ objectFit: 'contain', objectPosition: 'center', height: 220, backgroundColor: '#f8f9fa' }}
       />
       <div className="card-body d-flex flex-column">
         <h5 className="card-title">{product.title}</h5>
