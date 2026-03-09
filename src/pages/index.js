@@ -1,7 +1,0 @@
-export { default as AdminPage } from './AdminPage'
-export { default as HomePage } from './HomePage'
-export { default as LoginPage } from './LoginPage'
-export { default as NotFoundPage } from './NotFoundPage'
-export { default as UserPage } from './UserPage'
-export { default as ProductsPage } from './catalog/ProductsPage'
-export { default as ProductDetailPage } from './details/ProductDetailPage'

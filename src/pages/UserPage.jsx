@@ -1,4 +1,4 @@
-import { useAuth } from '../hooks'
+import { useAuth } from '../hooks/useAuth'
 
 function UserPage() {
   const { user } = useAuth()

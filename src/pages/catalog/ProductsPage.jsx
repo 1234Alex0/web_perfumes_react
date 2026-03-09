@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
-import { ProductCard } from '../../components'
-import { productsService } from '../../services'
+import ProductCard from '../../components/Cards/ProductCard'
+import { productsService } from '../../services/productsService'
 
 function ProductsPage() {
-  const ITEMS_PER_PAGE = 50
+  const ITEMS_PER_PAGE = 24
   const [products, setProducts] = useState([])
   const [search, setSearch] = useState('')
   const [brandFilter, setBrandFilter] = useState('all')
@@ -24,14 +24,24 @@ function ProductsPage() {
 
     const load = async () => {
       if (!isActive) return
-      setLoading(true)
       setError('')
       setWarning('')
       // setDataSource('')
 
+      const normalizedSearch = search.trim()
+      const cachedProducts = !normalizedSearch ? productsService.getCachedPerfumesSnapshot() : []
+
+      if (cachedProducts.length) {
+        setProducts(cachedProducts)
+        setWarning('Mostrando caché local mientras se actualiza el catálogo...')
+        setLoading(false)
+      } else {
+        setLoading(true)
+      }
+
       try {
-        const data = search.trim()
-          ? await productsService.searchPerfumes(search.trim())
+        const data = normalizedSearch
+          ? await productsService.searchPerfumes(normalizedSearch)
           : await productsService.getPerfumes()
         if (!isActive) return
 

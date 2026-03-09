@@ -10,6 +10,8 @@ function ProductCard({ product }) {
         src={imageUrl}
         className="card-img-top"
         alt={product.title}
+        loading="lazy"
+        decoding="async"
         style={{ objectFit: 'contain', objectPosition: 'center', height: 220, backgroundColor: '#f8f9fa' }}
       />
       <div className="card-body d-flex flex-column">

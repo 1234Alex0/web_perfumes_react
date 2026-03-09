@@ -1,14 +1,14 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { AppNavbar, ProtectedRoute, RoleRoute } from '../components'
-import {
-  AdminPage,
-  HomePage,
-  LoginPage,
-  NotFoundPage,
-  ProductDetailPage,
-  ProductsPage,
-  UserPage,
-} from '../pages'
+import AppNavbar from '../components/AppNavbar'
+import ProtectedRoute from '../components/ProtectedRoute'
+import RoleRoute from '../components/RoleRoute'
+import AdminPage from '../pages/AdminPage'
+import HomePage from '../pages/HomePage'
+import LoginPage from '../pages/LoginPage'
+import NotFoundPage from '../pages/NotFoundPage'
+import ProductDetailPage from '../pages/details/ProductDetailPage'
+import ProductsPage from '../pages/catalog/ProductsPage'
+import UserPage from '../pages/UserPage'
 
 function AppRouter() {
   return (

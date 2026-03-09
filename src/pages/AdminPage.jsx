@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
-import { ProductForm } from '../components'
-import { useAuth } from '../hooks'
-import { productsService } from '../services'
+import ProductForm from '../components/ProductForm'
+import { useAuth } from '../hooks/useAuth'
+import { productsService } from '../services/productsService'
 
 function AdminPage() {
   const { token } = useAuth()
@@ -33,7 +33,7 @@ function AdminPage() {
     try {
       const created = await productsService.createProduct(payload, token)
       setProducts((prev) => [created, ...prev])
-      toast.success('Producto creado (POST)')
+      toast.success('Perfume creado en panel admin (guardado local)')
     } catch (error) {
       toast.error(error.message)
     } finally {
@@ -59,7 +59,7 @@ function AdminPage() {
 
       setProducts((prev) => prev.map((item) => (item.id === replaced.id ? replaced : item)))
       setSelectedProduct(replaced)
-      toast.success('Producto actualizado por PUT')
+      toast.success('Perfume reemplazado en panel admin (PUT local)')
     } catch (error) {
       toast.error(error.message)
     } finally {
@@ -78,7 +78,7 @@ function AdminPage() {
       )
       setProducts((prev) => prev.map((item) => (item.id === patched.id ? { ...item, ...patched } : item)))
       setSelectedProduct((prev) => (prev ? { ...prev, ...patched } : prev))
-      toast.success('Producto actualizado por PATCH')
+      toast.success('Perfume actualizado en panel admin (PATCH local)')
     } catch (error) {
       toast.error(error.message)
     } finally {
@@ -94,7 +94,7 @@ function AdminPage() {
       if (selectedProduct?.id === productId) {
         setSelectedProduct(null)
       }
-      toast.success('Producto eliminado (DELETE)')
+      toast.success('Perfume eliminado en panel admin (DELETE local)')
     } catch (error) {
       toast.error(error.message)
     } finally {
@@ -113,7 +113,7 @@ function AdminPage() {
       const updated = await productsService.updateProduct(selectedProduct.id, formValues, token)
       setProducts((prev) => prev.map((item) => (item.id === updated.id ? { ...item, ...updated } : item)))
       setSelectedProduct((prev) => (prev ? { ...prev, ...updated } : prev))
-      toast.success('Producto editado desde formulario (PATCH)')
+      toast.success('Perfume editado desde formulario (PATCH local)')
     } catch (error) {
       toast.error(error.message)
     } finally {
@@ -165,7 +165,7 @@ function AdminPage() {
         <div className="col-12 col-lg-7">
           <div className="card shadow-sm border-0">
             <div className="card-body">
-              <h2 className="h5 mb-3">Productos cargados (GET)</h2>
+              <h2 className="h5 mb-3">Perfumes cargados desde PerfumAPI (GET)</h2>
               <div className="table-responsive">
                 <table className="table align-middle">
                   <thead>

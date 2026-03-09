@@ -1,6 +1,6 @@
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import { AUTH_TOKEN_STORAGE_KEY } from '../config/env'
-import { authService } from '../services'
+import { authService } from '../services/authService'
 
 export const AuthContext = createContext(null)
 
