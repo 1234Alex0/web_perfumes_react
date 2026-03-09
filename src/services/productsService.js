@@ -4,7 +4,7 @@ const PERFUM_API_LIST_URL = `${PERFUM_API_BASE_URL}/perfumes?limit=200&offset=0`
 const PERFUM_API_SEARCH_URL = (query) =>
   `${PERFUM_API_BASE_URL}/perfumes/search/${encodeURIComponent(query)}?limit=200`
 const PERFUM_API_DETAIL_URL = (id) => `${PERFUM_API_BASE_URL}/perfumes/${encodeURIComponent(id)}`
-const PERFUM_API_TIMEOUT_MS = 12000
+const PERFUM_API_TIMEOUT_MS = 30000
 const PERFUMES_CACHE_KEY = 'perfumes_catalog_cache_v1'
 const PERFUMES_ADMIN_MUTATIONS_KEY = 'perfumes_admin_mutations_v1'
 
