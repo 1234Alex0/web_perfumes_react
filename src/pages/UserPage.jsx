@@ -1,6 +1,6 @@
 import { useAuth } from '../hooks/useAuth'
 
-function UserDashboardPage() {
+function UserPage() {
   const { user } = useAuth()
 
   return (
@@ -29,4 +29,4 @@ function UserDashboardPage() {
   )
 }
 
-export default UserDashboardPage
+export default UserPage

@@ -43,12 +43,16 @@ function ProductDetailPage() {
 
   if (!product) return null
 
+  const imageUrl = product.thumbnail || 'https://via.placeholder.com/800x600?text=Sin+imagen'
+  const hasRating = typeof product.rating === 'number'
+  const hasPrice = typeof product.price === 'number'
+
   return (
     <section className="container-xl py-4 py-md-5">
       <div className="card border-0 shadow-sm overflow-hidden">
         <div className="row g-0">
           <div className="col-12 col-md-5">
-            <img src={product.thumbnail} alt={product.title} className="w-100 h-100" style={{ objectFit: 'cover' }} />
+            <img src={imageUrl} alt={product.title} className="w-100 h-100" style={{ objectFit: 'cover' }} />
           </div>
           <div className="col-12 col-md-7">
             <div className="card-body p-4 p-lg-5">
@@ -57,9 +61,9 @@ function ProductDetailPage() {
               <div className="d-flex gap-3 flex-wrap">
                 <span className="badge text-bg-dark">{product.brand || 'Marca nicho'}</span>
                 <span className="badge text-bg-success">Origen: Europeo / Dubai</span>
-                <span className="badge text-bg-warning">Rating: {product.rating}</span>
+                {hasRating && <span className="badge text-bg-warning">Rating: {product.rating}</span>}
               </div>
-              <h2 className="h4 mt-4">${product.price}</h2>
+              <h2 className="h4 mt-4">{hasPrice ? `$${product.price}` : 'Precio no disponible'}</h2>
               <Link to="/perfumes" className="btn btn-outline-dark mt-3">
                 Volver a perfumes
               </Link>

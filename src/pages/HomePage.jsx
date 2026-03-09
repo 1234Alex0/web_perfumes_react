@@ -18,7 +18,7 @@ function HomePage() {
         <hr className="my-4" />
 
         <ul className="mb-0">
-          <li>Perfumes filtrados desde la categoría `fragrances` de DummyJSON.</li>
+          <li>Catálogo de perfumes basado en PerfumAPI (datos de Fragrantica).</li>
           <li>Inspirado en perfiles olfativos europeos y árabes modernos.</li>
           <li>Interfaz responsive para escritorio, tablet y móvil.</li>
         </ul>

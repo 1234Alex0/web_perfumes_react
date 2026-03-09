@@ -4,7 +4,7 @@ import ProductForm from '../components/ProductForm'
 import { useAuth } from '../hooks/useAuth'
 import { productsService } from '../services/productsService'
 
-function AdminDashboardPage() {
+function AdminPage() {
   const { token } = useAuth()
   const [products, setProducts] = useState([])
   const [selectedProduct, setSelectedProduct] = useState(null)
@@ -204,4 +204,4 @@ function AdminDashboardPage() {
   )
 }
 
-export default AdminDashboardPage
+export default AdminPage
