@@ -131,16 +131,3 @@ Para GitHub Pages:
 
 ### Nota sobre rutas (React Router)
 - El deploy genera `404.html` automáticamente para evitar errores al refrescar rutas internas en GitHub Pages.
-
-## Requisitos académicos cubiertos
-- Rutas React: Cumplido
-- API con login: Cumplido
-- Apartado usuario y admin: Cumplido
-- Métodos GET/POST + PUT/PATCH/DELETE: Cumplido
-- Responsive obligatorio: Cumplido
-- 3+ librerías extra (sin Axios ni iconos): Cumplido
-- Estructura profesional: Cumplido
-- README con descripción, stack/versions, licencia e instalación: Cumplido
-
-## Licencia de uso
-Proyecto bajo licencia **MIT**. Ver archivo [LICENSE](./LICENSE).
